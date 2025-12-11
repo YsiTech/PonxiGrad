@@ -3,475 +3,1052 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>四川省蓬溪校园圈 - 校园社交平台</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            background: url('https://p4.itc.cn/q_70/images03/20221117/4589f0b1edd14a7cabb694c909f011b9.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            z-index: -1;
-        }
-        
-        header {
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            color: #1e6f5c;
-            font-size: 24px;
-            margin-left: 10px;
-        }
-        
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #1e6f5c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav li {
-            margin-left: 25px;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: #444;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #1e6f5c;
-        }
-        
-        .auth-buttons button {
-            padding: 8px 20px;
-            border-radius: 20px;
-            border: none;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .login-btn {
-            background: transparent;
-            color: #1e6f5c;
-            border: 1px solid #1e6f5c;
-            margin-right: 10px;
-        }
-        
-        .register-btn {
-            background: #1e6f5c;
-            color: white;
-        }
-        
-        .login-btn:hover {
-            background: rgba(30, 111, 92, 0.1);
-        }
-        
-        .register-btn:hover {
-            background: #155c4d;
-        }
-        
-        main {
-            flex: 1;
-            padding: 30px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        .hero {
-            text-align: center;
-            padding: 40px 0;
-            margin-bottom: 30px;
-        }
-        
-        .hero h2 {
-            font-size: 36px;
-            color: #1e6f5c;
-            margin-bottom: 15px;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            color: #555;
-            max-width: 600px;
-            margin: 0 auto 25px;
-            line-height: 1.6;
-        }
-        
-        .cta-button {
-            padding: 12px 30px;
-            background: #1e6f5c;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .cta-button:hover {
-            background: #155c4d;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(30, 111, 92, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            color: #1e6f5c;
-            font-size: 24px;
-        }
-        
-        .feature-card h3 {
-            color: #1e6f5c;
-            margin-bottom: 10px;
-        }
-        
-        .feature-card p {
-            color: #666;
-            line-height: 1.5;
-        }
-        
-        .posts-section {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .posts-section h3 {
-            color: #1e6f5c;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .post {
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .post:last-child {
-            border-bottom: none;
-        }
-        
-        .post-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #ddd;
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-weight: bold;
-        }
-        
-        .user-info h4 {
-            color: #333;
-            margin-bottom: 3px;
-        }
-        
-        .post-time {
-            color: #999;
-            font-size: 12px;
-        }
-        
-        .post-content {
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        
-        .post-actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .post-action {
-            display: flex;
-            align-items: center;
-            color: #666;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .post-action:hover {
-            color: #1e6f5c;
-        }
-        
-        footer {
-            background: rgba(30, 111, 92, 0.9);
-            color: white;
-            padding: 30px 5%;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            margin: 15px 0;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        
-        .footer-links a:hover {
-            opacity: 0.8;
-        }
-        
-        .copyright {
-            margin-top: 15px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
+    <title>红星社区 - 亚斯共和国主流社交平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <!-- 配置Tailwind自定义主题 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        redstar: {
+                            dark: '#8B0000', // 深红主色
+                            light: '#DC143C', // 浅红
+                            gold: '#D4AF37', // 星金
+                            gray: {
+                                100: '#F5F7FA', // 科技浅灰
+                                200: '#E4E7EB',
+                                300: '#C0C6CF',
+                                400: '#86909C',
+                                500: '#4E5969',
+                                600: '#272E3B',
+                                700: '#1D2129',
+                            }
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.1), backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.2);',
+                    }
+                }
             }
-            
-            nav {
-                margin: 15px 0;
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
             }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
             }
-            
-            nav li {
-                margin: 5px 10px;
+            .glass-effect-dark {
+                background: rgba(15, 23, 42, 0.8);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
             }
-            
-            .hero h2 {
-                font-size: 28px;
+            .pulse-effect {
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
             }
-            
-            .hero p {
-                font-size: 16px;
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .badge-tag {
+                @apply inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium;
+            }
+            .post-marked {
+                position: relative;
+                filter: blur(2px);
+                opacity: 0.7;
+            }
+            .post-marked::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(220, 20, 60, 0.1);
+                border: 1px solid rgba(220, 20, 60, 0.3);
+                z-index: 10;
+                border-radius: 8px;
+            }
+            .post-marked::before {
+                content: '请注意辨别信息真伪';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(220, 20, 60, 0.8);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-size: 14px;
+                z-index: 20;
+                cursor: pointer;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
             }
         }
     </style>
 </head>
-<body>
-    <div class="overlay"></div>
-    
-    <header>
-        <div class="logo">
-            <div class="logo-icon">蓬</div>
-            <h1>四川省蓬溪校园圈</h1>
-        </div>
-        
-        <nav>
-            <ul>
-                <li><a href="#">首页</a></li>
-                <li><a href="#">校园动态</a></li>
-                <li><a href="#">兴趣小组</a></li>
-                <li><a href="#">活动中心</a></li>
-                <li><a href="#">校园服务</a></li>
-            </ul>
-        </nav>
-        
-        <div class="auth-buttons">
-            <button class="login-btn">登录</button>
-            <button class="register-btn">注册</button>
+<body class="bg-redstar-gray-100 font-sans text-redstar-gray-700">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 glass-effect-dark text-white">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- 平台Logo -->
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-redstar-light flex items-center justify-center">
+                    <i class="fa fa-star text-redstar-gold text-xl"></i>
+                </div>
+                <h1 class="text-xl font-bold tracking-wider">红星社区</h1>
+                <span class="text-xs text-redstar-gray-300">亚斯共和国 · 有序连接</span>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#hot" class="hover:text-redstar-gold transition-colors duration-300 flex items-center">
+                    <i class="fa fa-fire mr-1"></i>热搜
+                </a>
+                <a href="#topic" class="hover:text-redstar-gold transition-colors duration-300 flex items-center">
+                    <i class="fa fa-comments mr-1"></i>话题
+                </a>
+                <a href="#users" class="hover:text-redstar-gold transition-colors duration-300 flex items-center">
+                    <i class="fa fa-user mr-1"></i>用户
+                </a>
+                <a href="#action" class="hover:text-redstar-gold transition-colors duration-300 flex items-center pulse-effect">
+                    <i class="fa fa-lightbulb-o mr-1 text-redstar-gold"></i>灯光守望
+                </a>
+            </nav>
+            
+            <!-- 用户操作区 -->
+            <div class="flex items-center space-x-4">
+                <button class="w-10 h-10 rounded-full bg-redstar-gray-600 flex items-center justify-center hover:bg-redstar-light transition-colors">
+                    <i class="fa fa-bell"></i>
+                </button>
+                <div class="w-10 h-10 rounded-full bg-redstar-gold flex items-center justify-center text-redstar-dark font-bold">
+                    <span>用</span>
+                </div>
+            </div>
         </div>
     </header>
-    
-    <main>
-        <section class="hero">
-            <h2>连接校园，分享生活</h2>
-            <p>四川省蓬溪校园圈是专为蓬溪学子打造的社交平台，在这里你可以分享校园生活、参与活动、结交朋友，共同创造美好的校园回忆。</p>
-            <button class="cta-button">立即加入</button>
+
+    <main class="container mx-auto px-4 py-6">
+        <!-- 热搜榜区域 -->
+        <section id="hot" class="mb-12">
+            <div class="glass-effect rounded-xl p-6 shadow-glass">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-redstar-dark flex items-center">
+                        <i class="fa fa-line-chart text-redstar-gold mr-2"></i>
+                        实时热搜榜
+                        <span class="ml-3 text-sm text-redstar-gray-400">数据更新于：2025-06-15 14:28</span>
+                    </h2>
+                    <button class="text-redstar-dark hover:text-redstar-light transition-colors text-sm flex items-center">
+                        <i class="fa fa-refresh mr-1"></i>刷新榜单
+                    </button>
+                </div>
+                
+                <!-- 热搜列表 -->
+                <div class="space-y-4">
+                    <!-- 热搜1 -->
+                    <div class="flex items-center p-3 hover:bg-redstar-gray-100 rounded-lg transition-colors cursor-pointer pulse-effect">
+                        <div class="w-8 h-8 rounded-full bg-redstar-light text-white flex items-center justify-center font-bold mr-4">1</div>
+                        <div class="flex-1">
+                            <h3 class="font-medium">#SU0507你们在哪里#</h3>
+                            <div class="flex items-center mt-1 space-x-2">
+                                <span class="badge-tag bg-redstar-light text-white">(爆)</span>
+                                <span class="text-xs text-redstar-gray-400">热度：12,589,342</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-angle-right text-redstar-gray-300"></i>
+                    </div>
+                    
+                    <!-- 热搜2 -->
+                    <div class="flex items-center p-3 hover:bg-redstar-gray-100 rounded-lg transition-colors cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-redstar-gold text-redstar-dark flex items-center justify-center font-bold mr-4">2</div>
+                        <div class="flex-1">
+                            <h3 class="font-medium">#苏联航空SU-0707航班失联最新通报#</h3>
+                            <div class="flex items-center mt-1 space-x-2">
+                                <span class="badge-tag bg-blue-600 text-white">(官)</span>
+                                <span class="badge-tag bg-redstar-light text-white">(热)</span>
+                                <span class="text-xs text-redstar-gray-400">热度：9,876,541</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-angle-right text-redstar-gray-300"></i>
+                    </div>
+                    
+                    <!-- 热搜3 -->
+                    <div class="flex items-center p-3 hover:bg-redstar-gray-100 rounded-lg transition-colors cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-redstar-gray-500 text-white flex items-center justify-center font-bold mr-4">3</div>
+                        <div class="flex-1">
+                            <h3 class="font-medium">#灯光守望行动参与指南#</h3>
+                            <div class="flex items-center mt-1 space-x-2">
+                                <span class="badge-tag bg-green-600 text-white">(议)</span>
+                                <span class="badge-tag bg-purple-600 text-white">(新)</span>
+                                <span class="text-xs text-redstar-gray-400">热度：7,654,321</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-angle-right text-redstar-gray-300"></i>
+                    </div>
+                    
+                    <!-- 热搜4 -->
+                    <div class="flex items-center p-3 hover:bg-redstar-gray-100 rounded-lg transition-colors cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-redstar-gray-400 text-white flex items-center justify-center font-bold mr-4">4</div>
+                        <div class="flex-1">
+                            <h3 class="font-medium">#蓬溪格勒人民高等中学校长蒋洪祈福语音#</h3>
+                            <div class="flex items-center mt-1 space-x-2">
+                                <span class="badge-tag bg-pink-600 text-white">(泪)</span>
+                                <span class="text-xs text-redstar-gray-400">热度：6,543,210</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-angle-right text-redstar-gray-300"></i>
+                    </div>
+                    
+                    <!-- 热搜5 -->
+                    <div class="flex items-center p-3 hover:bg-redstar-gray-100 rounded-lg transition-colors cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-redstar-gray-300 text-white flex items-center justify-center font-bold mr-4">5</div>
+                        <div class="flex-1">
+                            <h3 class="font-medium">#惊鸿十二我们等你#</h3>
+                            <div class="flex items-center mt-1 space-x-2">
+                                <span class="badge-tag bg-orange-600 text-white">(警)</span>
+                                <span class="text-xs text-redstar-gray-400">热度：5,432,109</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-angle-right text-redstar-gray-300"></i>
+                    </div>
+                </div>
+            </div>
         </section>
-        
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3>学习交流</h3>
-                <p>与同学分享学习心得，讨论课程问题，共同进步成长。</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>兴趣小组</h3>
-                <p>找到志同道合的朋友，一起探索兴趣，丰富校园生活。</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎉</div>
-                <h3>校园活动</h3>
-                <p>发布和参与各类校园活动，让课余生活更加丰富多彩。</p>
+
+        <!-- 话题聚合页 -->
+        <section id="topic" class="mb-12">
+            <div class="glass-effect rounded-xl p-6 shadow-glass">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-redstar-dark flex items-center">
+                        <i class="fa fa-comments-o text-redstar-gold mr-2"></i>
+                        #苏联航空SU-0707航班失联最新通报#
+                        <span class="ml-3 text-sm text-redstar-gray-400">参与讨论：2,345,678</span>
+                    </h2>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-redstar-light text-white rounded-lg hover:bg-redstar-dark transition-colors flex items-center">
+                            <i class="fa fa-share-alt mr-1"></i>分享话题
+                        </button>
+                        <button class="px-4 py-2 bg-white text-redstar-dark border border-redstar-gray-200 rounded-lg hover:bg-redstar-gray-100 transition-colors flex items-center">
+                            <i class="fa fa-plus mr-1"></i>发布观点
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 置顶官方通稿 -->
+                <div class="mb-8 border border-redstar-gold rounded-xl p-6 bg-white shadow-md">
+                    <div class="flex items-start space-x-4">
+                        <img src="https://picsum.photos/60/60" alt="亚斯共和国交通运输部" class="w-12 h-12 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">亚斯共和国交通运输部</h3>
+                                    <div class="flex items-center mt-1 text-sm text-redstar-gray-400">
+                                        <span class="badge-tag bg-blue-600 text-white flex items-center">
+                                            <i class="fa fa-shield mr-1"></i>蓝V认证
+                                        </span>
+                                        <span class="ml-2">2025-06-15 12:00 发布</span>
+                                    </div>
+                                </div>
+                                <button class="text-redstar-gray-400 hover:text-redstar-dark">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="mt-4 text-redstar-gray-700">
+                                <p class="mb-3">关于苏联航空SU-0707航班失联事件的最新通报：截至今日12时，国家应急指挥中心已协调12艘救援舰艇、8架搜救飞机、3颗监测卫星参与搜救行动。目前在疑似失联海域发现部分漂浮物，正组织力量核实是否与失联航班相关。</p>
+                                <p class="mb-3">国家工作组已进驻苏联航空开展调查，相关技术专家正在分析飞行数据。请广大民众不信谣、不传谣，一切以官方通报为准。</p>
+                                <p>亚斯共和国始终将人民生命安全放在首位，将尽最大努力开展搜救工作。</p>
+                            </div>
+                            
+                            <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                <div class="flex space-x-6">
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-handshake-o mr-1"></i>
+                                        <span>支持 28.6万</span>
+                                    </button>
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-comment-o mr-1"></i>
+                                        <span>评论 12.3万</span>
+                                    </button>
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-share mr-1"></i>
+                                        <span>转发 8.9万</span>
+                                    </button>
+                                </div>
+                                <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                    <i class="fa fa-star-o mr-1"></i>
+                                    <span>收藏</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 信息流 -->
+                <div class="space-y-6">
+                    <!-- 已标记帖子（谣言） -->
+                    <div class="post-marked bg-white rounded-xl p-6 shadow-md cursor-pointer" onclick="this.classList.remove('post-marked')">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://picsum.photos/61/61" alt="匿名用户" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold">匿名用户</h3>
+                                        <div class="text-sm text-redstar-gray-400 mt-1">2025-06-15 11:30 发布</div>
+                                    </div>
+                                    <button class="text-redstar-gray-400 hover:text-redstar-dark">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 text-redstar-gray-700">
+                                    <p>内部消息！SU0507航班其实是被导弹击中的，官方一直在隐瞒真相！大家赶紧转发！</p>
+                                </div>
+                                
+                                <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                    <div class="flex space-x-6">
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-handshake-o mr-1"></i>
+                                            <span>支持 1,234</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-comment-o mr-1"></i>
+                                            <span>评论 567</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-share mr-1"></i>
+                                            <span>转发 890</span>
+                                        </button>
+                                    </div>
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-star-o mr-1"></i>
+                                        <span>收藏</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 亚斯青年报帖子 -->
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://picsum.photos/62/62" alt="亚斯青年报" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg">亚斯青年报</h3>
+                                        <div class="flex items-center mt-1 text-sm text-redstar-gray-400">
+                                            <span class="badge-tag bg-blue-600 text-white flex items-center">
+                                                <i class="fa fa-shield mr-1"></i>蓝V认证
+                                            </span>
+                                            <span class="ml-2">2025-06-15 10:45 发布</span>
+                                        </div>
+                                    </div>
+                                    <button class="text-redstar-gray-400 hover:text-redstar-dark">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 text-redstar-gray-700">
+                                    <p class="mb-3">【灯光守望行动】昨夜，全国超过2300万民众参与"灯光守望"行动，点亮灯光为SU0507航班祈福。国家卫星拍摄的实时影像显示，沿海地区形成了壮观的灯光连线，如同为失联航班指引回家的路。</p>
+                                    <div class="mt-4 rounded-lg overflow-hidden">
+                                        <img src="https://picsum.photos/800/400" alt="灯光守望卫星图" class="w-full h-auto">
+                                        <p class="text-xs text-redstar-gray-400 mt-2 text-center">灯光守望行动卫星影像图</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                    <div class="flex space-x-6">
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-handshake-o mr-1"></i>
+                                            <span>支持 18.7万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-comment-o mr-1"></i>
+                                            <span>评论 8.6万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-share mr-1"></i>
+                                            <span>转发 12.4万</span>
+                                        </button>
+                                    </div>
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-star-o mr-1"></i>
+                                        <span>收藏</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 技术分析党-老王帖子 -->
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://picsum.photos/63/63" alt="技术分析党-老王" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg">技术分析党-老王</h3>
+                                        <div class="flex items-center mt-1 text-sm text-redstar-gray-400">
+                                            <span class="badge-tag bg-yellow-600 text-white flex items-center">
+                                                <i class="fa fa-certificate mr-1"></i>黄V认证
+                                            </span>
+                                            <span class="ml-2">领域专家·海洋动力学</span>
+                                            <span class="ml-2">2025-06-15 09:30 发布</span>
+                                        </div>
+                                    </div>
+                                    <button class="text-redstar-gray-400 hover:text-redstar-dark">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 text-redstar-gray-700">
+                                    <p class="mb-3">基于国家海洋局发布的洋流数据和气象卫星信息，我制作了SU0507航班疑似失联海域的洋流模拟分析图。从模拟结果来看，若飞机坠入海中，残骸可能随洋流向东南方向漂移约120海里。</p>
+                                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="rounded-lg overflow-hidden">
+                                            <canvas id="oceanCurrentChart" width="400" height="200"></canvas>
+                                        </div>
+                                        <div class="rounded-lg overflow-hidden">
+                                            <img src="https://picsum.photos/400/200" alt="海域分析图" class="w-full h-auto">
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <a href="#rational-discussion" class="text-redstar-light hover:underline flex items-center">
+                                            <i class="fa fa-comment mr-1"></i>进入理性讨论区 >>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                    <div class="flex space-x-6">
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-handshake-o mr-1"></i>
+                                            <span>支持 5.6万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-comment-o mr-1"></i>
+                                            <span>评论 3.2万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-share mr-1"></i>
+                                            <span>转发 4.8万</span>
+                                        </button>
+                                    </div>
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-star-o mr-1"></i>
+                                        <span>收藏</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 诚妈盼归帖子 -->
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://picsum.photos/64/64" alt="诚妈盼归" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg">诚妈盼归</h3>
+                                        <div class="text-sm text-redstar-gray-400 mt-1">2025-06-15 08:15 发布</div>
+                                    </div>
+                                    <button class="text-redstar-gray-400 hover:text-redstar-dark">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 text-redstar-gray-700">
+                                    <div class="bg-redstar-gray-100 rounded-lg p-4 mb-3">
+                                        <div class="flex items-center space-x-3 text-redstar-light mb-2">
+                                            <i class="fa fa-volume-up text-xl"></i>
+                                            <span class="font-medium">语音转文字</span>
+                                        </div>
+                                        <p class="italic">"天诚啊，妈妈在等你回家...你答应过妈妈这次回来要陪我过生日的...求求你一定要平安...妈妈每天都在为你祈福，全国的好心人都在为你们祈福...孩子，一定要坚持住..."</p>
+                                        <div class="mt-2 flex items-center justify-between">
+                                            <div class="w-full bg-redstar-gray-200 rounded-full h-2">
+                                                <div class="bg-redstar-light h-2 rounded-full" style="width: 65%"></div>
+                                            </div>
+                                            <button class="ml-3 text-redstar-gray-500 hover:text-redstar-light">
+                                                <i class="fa fa-play"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="text-redstar-dark font-medium">我的孩子李天诚在SU0507航班上，作为一名母亲，我只想我的孩子平安归来。恳请国家救救我的孩子，救救所有乘客！🙏🙏🙏</p>
+                                    
+                                    <!-- 系统自动插入的心理疏导热线 -->
+                                    <div class="mt-4 bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r-lg">
+                                        <p class="text-sm text-blue-700 flex items-center">
+                                            <i class="fa fa-info-circle mr-2"></i>
+                                            【心理援助】亚斯共和国心理疏导热线：400-123-4567，专业心理咨询师24小时为您提供心理支持。
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                    <div class="flex space-x-6">
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-handshake-o mr-1"></i>
+                                            <span>支持 36.8万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-comment-o mr-1"></i>
+                                            <span>评论 24.5万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-share mr-1"></i>
+                                            <span>转发 18.9万</span>
+                                        </button>
+                                    </div>
+                                    <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                        <i class="fa fa-star-o mr-1"></i>
+                                        <span>收藏</span>
+                                    </button>
+                                </div>
+                                
+                                <!-- 热门评论 -->
+                                <div class="mt-4">
+                                    <h4 class="font-medium mb-3">热门评论</h4>
+                                    <div class="space-y-3">
+                                        <div class="bg-redstar-gray-50 p-3 rounded-lg">
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <img src="https://picsum.photos/30/30" alt="用户头像" class="w-6 h-6 rounded-full">
+                                                <span class="font-medium text-sm">暖心网友001</span>
+                                            </div>
+                                            <p class="text-sm">阿姨您一定要保重身体，我们都在为天诚祈福，相信国家一定会全力以赴的！🙏</p>
+                                        </div>
+                                        <div class="bg-redstar-gray-50 p-3 rounded-lg">
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <img src="https://picsum.photos/31/31" alt="用户头像" class="w-6 h-6 rounded-full">
+                                                <span class="font-medium text-sm">亚斯心理援助中心</span>
+                                                <span class="badge-tag bg-blue-600 text-white text-xs">蓝V</span>
+                                            </div>
+                                            <p class="text-sm">阿姨您好，看到您的留言我们非常心疼。如果您需要心理支持，可以随时拨打我们的热线，我们的咨询师会一直陪伴您。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        
-        <section class="posts-section">
-            <h3>最新动态</h3>
-            
-            <div class="post">
-                <div class="post-header">
-                    <div class="avatar">张</div>
-                    <div class="user-info">
-                        <h4>张三同学</h4>
-                        <div class="post-time">2小时前</div>
+
+        <!-- 用户主页区域 -->
+        <section id="users" class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 诚妈盼归主页 -->
+                <div class="glass-effect rounded-xl p-6 shadow-glass">
+                    <div class="flex flex-col items-center mb-6">
+                        <img src="https://picsum.photos/100/100" alt="诚妈盼归" class="w-24 h-24 rounded-full mb-3 border-2 border-redstar-gold">
+                        <h3 class="text-xl font-bold text-redstar-dark">诚妈盼归</h3>
+                        <p class="text-redstar-gray-400 text-sm mt-1">李天诚母亲 | 祈福平安</p>
+                        <div class="flex space-x-4 mt-4">
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">128</p>
+                                <p class="text-xs text-redstar-gray-400">动态</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">8.6万</p>
+                                <p class="text-xs text-redstar-gray-400">关注</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">125.8万</p>
+                                <p class="text-xs text-redstar-gray-400">粉丝</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-redstar-gray-200 pt-4">
+                        <h4 class="font-medium mb-3">最新动态</h4>
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <p class="text-sm mb-2">2025-06-15 08:15</p>
+                            <p class="text-redstar-gray-700 text-sm">我的孩子李天诚在0607航班上，作为一名母亲，我只想我的孩子平安归来...🙏</p>
+                            <div class="mt-2 flex items-center text-xs text-redstar-gray-400">
+                                <span class="mr-4"><i class="fa fa-handshake-o mr-1"></i>36.8万</span>
+                                <span><i class="fa fa-comment-o mr-1"></i>24.5万</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <p class="text-sm mb-2">2025-06-14 22:00</p>
+                            <p class="text-redstar-gray-700 text-sm">一夜未眠，看着天诚的照片，妈妈只想你平安回家。全国的好心人，谢谢你们的祝福🙏</p>
+                            <div class="mt-2 flex items-center text-xs text-redstar-gray-400">
+                                <span class="mr-4"><i class="fa fa-handshake-o mr-1"></i>18.7万</span>
+                                <span><i class="fa fa-comment-o mr-1"></i>12.3万</span>
+                            </div>
+                        </div>
+                        <button class="w-full py-2 text-center text-redstar-light hover:text-redstar-dark text-sm transition-colors">
+                            查看更多动态
+                        </button>
                     </div>
                 </div>
-                <div class="post-content">
-                    <p>今天在图书馆发现了一本超级好看的科幻小说，推荐给大家！《三体》真的让人脑洞大开，有一起讨论的同学吗？</p>
+                
+                <!-- 亚斯青年报主页 -->
+                <div class="glass-effect rounded-xl p-6 shadow-glass">
+                    <div class="flex flex-col items-center mb-6">
+                        <img src="https://picsum.photos/101/101" alt="亚斯青年报" class="w-24 h-24 rounded-full mb-3 border-2 border-blue-600">
+                        <h3 class="text-xl font-bold text-redstar-dark">亚斯青年报</h3>
+                        <div class="flex items-center mt-1">
+                            <span class="badge-tag bg-blue-600 text-white flex items-center text-xs">
+                                <i class="fa fa-shield mr-1"></i>蓝V认证
+                            </span>
+                            <span class="text-redstar-gray-400 text-sm ml-2">官方媒体</span>
+                        </div>
+                        <div class="flex space-x-4 mt-4">
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">3,892</p>
+                                <p class="text-xs text-redstar-gray-400">动态</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">128</p>
+                                <p class="text-xs text-redstar-gray-400">关注</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">2,589.7万</p>
+                                <p class="text-xs text-redstar-gray-400">粉丝</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-redstar-gray-200 pt-4">
+                        <h4 class="font-medium mb-3">最新动态</h4>
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <p class="text-sm mb-2">2025-06-15 10:45</p>
+                            <p class="text-redstar-gray-700 text-sm">【灯光守望行动】昨夜，全国超过2300万民众参与"灯光守望"行动，点亮灯光为SU0507航班祈福...</p>
+                            <div class="mt-2 flex items-center text-xs text-redstar-gray-400">
+                                <span class="mr-4"><i class="fa fa-handshake-o mr-1"></i>18.7万</span>
+                                <span><i class="fa fa-comment-o mr-1"></i>8.6万</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <p class="text-sm mb-2">2025-06-15 09:00</p>
+                            <p class="text-redstar-gray-700 text-sm">【正能量】亚斯各地民众自发组织祈福活动，为SU0507航班乘客祈福，彰显集体主义精神...</p>
+                            <div class="mt-2 flex items-center text-xs text-redstar-gray-400">
+                                <span class="mr-4"><i class="fa fa-handshake-o mr-1"></i>12.5万</span>
+                                <span><i class="fa fa-comment-o mr-1"></i>5.8万</span>
+                            </div>
+                        </div>
+                        <button class="w-full py-2 text-center text-redstar-light hover:text-redstar-dark text-sm transition-colors">
+                            查看更多动态
+                        </button>
+                    </div>
                 </div>
-                <div class="post-actions">
-                    <div class="post-action">👍 12</div>
-                    <div class="post-action">💬 5</div>
-                    <div class="post-action">🔄 2</div>
+                
+                <!-- 技术分析党-老王主页 -->
+                <div class="glass-effect rounded-xl p-6 shadow-glass">
+                    <div class="flex flex-col items-center mb-6">
+                        <img src="https://picsum.photos/102/102" alt="技术分析党-老王" class="w-24 h-24 rounded-full mb-3 border-2 border-yellow-600">
+                        <h3 class="text-xl font-bold text-redstar-dark">技术分析党-老王</h3>
+                        <div class="flex items-center mt-1">
+                            <span class="badge-tag bg-yellow-600 text-white flex items-center text-xs">
+                                <i class="fa fa-certificate mr-1"></i>黄V认证
+                            </span>
+                            <span class="text-redstar-gray-400 text-sm ml-2">海洋动力学专家</span>
+                        </div>
+                        <div class="flex space-x-4 mt-4">
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">892</p>
+                                <p class="text-xs text-redstar-gray-400">动态</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">356</p>
+                                <p class="text-xs text-redstar-gray-400">关注</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold text-redstar-dark">156.8万</p>
+                                <p class="text-xs text-redstar-gray-400">粉丝</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-redstar-gray-200 pt-4">
+                        <h4 class="font-medium mb-3">最新动态</h4>
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <p class="text-sm mb-2">2025-06-15 09:30</p>
+                            <p class="text-redstar-gray-700 text-sm">基于国家海洋局发布的洋流数据，我制作了SU0507航班疑似失联海域的洋流模拟分析图...</p>
+                            <div class="mt-2 flex items-center text-xs text-redstar-gray-400">
+                                <span class="mr-4"><i class="fa fa-handshake-o mr-1"></i>5.6万</span>
+                                <span><i class="fa fa-comment-o mr-1"></i>3.2万</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <p class="text-sm mb-2">2025-06-14 20:15</p>
+                            <p class="text-redstar-gray-700 text-sm">【技术分析】SU0507航班失联区域气象条件分析：事发时该区域有中度湍流，能见度约5公里...</p>
+                            <div class="mt-2 flex items-center text-xs text-redstar-gray-400">
+                                <span class="mr-4"><i class="fa fa-handshake-o mr-1"></i>3.8万</span>
+                                <span><i class="fa fa-comment-o mr-1"></i>2.1万</span>
+                            </div>
+                        </div>
+                        <button class="w-full py-2 text-center text-redstar-light hover:text-redstar-dark text-sm transition-colors">
+                            查看更多动态
+                        </button>
+                    </div>
                 </div>
             </div>
-            
-            <div class="post">
-                <div class="post-header">
-                    <div class="avatar">李</div>
-                    <div class="user-info">
-                        <h4>李四老师</h4>
-                        <div class="post-time">5小时前</div>
+        </section>
+
+        <!-- 集体行动区域 -->
+        <section id="action" class="mb-12">
+            <div class="glass-effect rounded-xl p-6 shadow-glass bg-gradient-to-br from-redstar-light/10 to-redstar-gold/10">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-6 md:mb-0 md:mr-6">
+                        <h2 class="text-2xl font-bold text-redstar-dark flex items-center">
+                            <i class="fa fa-lightbulb-o text-redstar-gold mr-2 text-xl"></i>
+                            参与"灯光守望"行动
+                        </h2>
+                        <p class="mt-2 text-redstar-gray-500 max-w-md">
+                            为SU0507航班失联乘客祈福，点亮您身边的灯光，传递希望与温暖。亚斯共和国，众志成城，守望相助。
+                        </p>
+                        <div class="mt-4 flex space-x-4">
+                            <button class="px-6 py-3 bg-redstar-light text-white rounded-lg hover:bg-redstar-dark transition-colors flex items-center pulse-effect">
+                                <i class="fa fa-star mr-2"></i>立即参与
+                            </button>
+                            <button class="px-6 py-3 bg-white text-redstar-dark border border-redstar-gray-200 rounded-lg hover:bg-redstar-gray-100 transition-colors flex items-center">
+                                <i class="fa fa-info-circle mr-2"></i>活动指南
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="post-content">
-                    <p>下周三下午3点将在教学楼301举办"人工智能与未来"专题讲座，欢迎对AI感兴趣的同学前来参加！</p>
-                </div>
-                <div class="post-actions">
-                    <div class="post-action">👍 28</div>
-                    <div class="post-action">💬 7</div>
-                    <div class="post-action">🔄 3</div>
+                    
+                    <div class="w-full md:w-1/2 bg-white rounded-xl p-4 shadow-md">
+                        <h3 class="font-medium mb-4">行动参与数据</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="bg-redstar-gray-50 rounded-lg p-4 text-center">
+                                <p class="text-3xl font-bold text-redstar-light">2300万+</p>
+                                <p class="text-sm text-redstar-gray-400 mt-1">参与人数</p>
+                            </div>
+                            <div class="bg-redstar-gray-50 rounded-lg p-4 text-center">
+                                <p class="text-3xl font-bold text-redstar-gold">328个</p>
+                                <p class="text-sm text-redstar-gray-400 mt-1">参与城市</p>
+                            </div>
+                        </div>
+                        <div class="rounded-lg overflow-hidden">
+                            <canvas id="participationChart" width="400" height="200"></canvas>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <button class="px-4 py-2 bg-redstar-gold text-white rounded-lg hover:bg-redstar-dark transition-colors flex items-center mx-auto">
+                                <i class="fa fa-medal mr-2"></i>生成我的数字勋章
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="post">
-                <div class="post-header">
-                    <div class="avatar">王</div>
-                    <div class="user-info">
-                        <h4>王五同学</h4>
-                        <div class="post-time">昨天</div>
+        </section>
+
+        <!-- 理性讨论区 -->
+        <section id="rational-discussion" class="mb-12">
+            <div class="glass-effect rounded-xl p-6 shadow-glass">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-redstar-dark flex items-center">
+                        <i class="fa fa-comments text-redstar-gold mr-2"></i>
+                        理性讨论区 · SU0507航班技术分析
+                    </h2>
+                    <button class="px-4 py-2 bg-redstar-light text-white rounded-lg hover:bg-redstar-dark transition-colors flex items-center">
+                        <i class="fa fa-pencil mr-1"></i>发布分析
+                    </button>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://picsum.photos/65/65" alt="技术分析党-老王" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg">技术分析党-老王</h3>
+                                        <div class="flex items-center mt-1 text-sm text-redstar-gray-400">
+                                            <span class="badge-tag bg-yellow-600 text-white flex items-center">
+                                                <i class="fa fa-certificate mr-1"></i>黄V认证
+                                            </span>
+                                            <span class="ml-2">2025-06-15 10:00 发布</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 text-redstar-gray-700">
+                                    <h4 class="font-medium">SU0507航班失联可能原因技术分析</h4>
+                                    <p class="mt-2 mb-3">根据公开的航班数据和气象信息，我认为可能的失联原因包括：</p>
+                                    <ol class="list-decimal list-inside space-y-2 mb-3">
+                                        <li>气象因素：事发区域的中度湍流可能导致飞行姿态失控</li>
+                                        <li>机械故障：发动机或导航系统故障的可能性约35%</li>
+                                        <li>人为因素：暂未发现相关证据，可能性较低</li>
+                                    </ol>
+                                    <p>以上分析仅基于公开数据，具体原因需等待官方调查结果。</p>
+                                </div>
+                                
+                                <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                    <div class="flex space-x-6">
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-thumbs-up mr-1"></i>
+                                            <span>赞同 4.2万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-thumbs-down mr-1"></i>
+                                            <span>反对 356</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-comment-o mr-1"></i>
+                                            <span>评论 2.8万</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="post-content">
-                    <p>篮球社本周五下午4点将在体育馆举行友谊赛，欢迎各位同学前来观战或参与！</p>
-                </div>
-                <div class="post-actions">
-                    <div class="post-action">👍 35</div>
-                    <div class="post-action">💬 12</div>
-                    <div class="post-action">🔄 6</div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <img src="https://picsum.photos/66/66" alt="航空工程师-李工" class="w-12 h-12 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg">航空工程师-李工</h3>
+                                        <div class="flex items-center mt-1 text-sm text-redstar-gray-400">
+                                            <span class="badge-tag bg-yellow-600 text-white flex items-center">
+                                                <i class="fa fa-certificate mr-1"></i>黄V认证
+                                            </span>
+                                            <span class="ml-2">2025-06-15 10:30 发布</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 text-redstar-gray-700">
+                                    <p class="mb-3">补充老王的分析：SU0507航班使用的是V2500发动机，该型号发动机在极端气象条件下曾出现过燃油供应不稳定的问题。结合事发时的湍流情况，发动机故障的可能性应上调至45%左右。</p>
+                                    <p>此外，该航班的导航系统若未及时更新最新的气象数据，也可能导致飞行员误判飞行路径。</p>
+                                </div>
+                                
+                                <div class="mt-6 flex items-center justify-between border-t border-redstar-gray-200 pt-4">
+                                    <div class="flex space-x-6">
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-thumbs-up mr-1"></i>
+                                            <span>赞同 2.1万</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-thumbs-down mr-1"></i>
+                                            <span>反对 128</span>
+                                        </button>
+                                        <button class="flex items-center text-redstar-gray-500 hover:text-redstar-light">
+                                            <i class="fa fa-comment-o mr-1"></i>
+                                            <span>评论 1.5万</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="logo">
-                <div class="logo-icon">蓬</div>
-                <h1>四川省蓬溪校园圈</h1>
+
+    <!-- 底部区域 -->
+    <footer class="bg-redstar-gray-700 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-redstar-light flex items-center justify-center">
+                            <i class="fa fa-star text-redstar-gold"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">红星社区</h3>
+                    </div>
+                    <p class="text-redstar-gray-300 text-sm max-w-md">
+                        红星社区 - 亚斯共和国主流社交平台。在有序中连接，在连接中引导。
+                        秉承集体主义精神，服务人民，服务国家。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-medium mb-3 text-redstar-gold">平台服务</h4>
+                        <ul class="space-y-2 text-sm text-redstar-gray-300">
+                            <li><a href="#" class="hover:text-white transition-colors">用户协议</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">隐私政策</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">内容规范</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">帮助中心</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-3 text-redstar-gold">联系我们</h4>
+                        <ul class="space-y-2 text-sm text-redstar-gray-300">
+                            <li><a href="#" class="hover:text-white transition-colors">客服热线</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">举报中心</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">意见反馈</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">心理援助</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-3 text-redstar-gold">关于亚斯</h4>
+                        <ul class="space-y-2 text-sm text-redstar-gray-300">
+                            <li><a href="#" class="hover:text-white transition-colors">国家概况</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">政策公告</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">应急响应</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">集体行动</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
-            <div class="footer-links">
-                <a href="#">关于我们</a>
-                <a href="#">隐私政策</a>
-                <a href="#">使用条款</a>
-                <a href="#">帮助中心</a>
-                <a href="#">联系我们</a>
-            </div>
-            
-            <div class="copyright">
-                © 2023 四川省蓬溪校园圈 版权所有
+            <div class="border-t border-redstar-gray-600 mt-8 pt-6 text-center text-redstar-gray-400 text-xs">
+                <p>© 2025 亚斯共和国信息产业部 版权所有 | 备案号：亚ICP备12345678号</p>
+                <p class="mt-2">本平台所有内容受亚斯共和国法律保护，严禁传播违法违规信息</p>
             </div>
         </div>
     </footer>
+
+    <!-- 谣言澄清浮窗（默认隐藏） -->
+    <div id="rumorPopup" class="fixed bottom-6 right-6 bg-white rounded-xl shadow-lg p-4 w-80 hidden z-50">
+        <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white">
+                <i class="fa fa-exclamation-triangle"></i>
+            </div>
+            <div class="flex-1">
+                <h3 class="font-bold text-orange-600">谣言澄清</h3>
+                <p class="text-sm text-redstar-gray-600 mt-1">
+                    您试图分享的内容包含不实信息。官方通报显示，SU0507航班失联原因正在调查中，暂无证据表明与导弹有关。请以官方信息为准，不信谣不传谣。
+                </p>
+                <div class="mt-3 flex justify-end">
+                    <a href="#" class="text-redstar-light hover:underline text-sm">查看完整辟谣公告 →</a>
+                </div>
+            </div>
+            <button onclick="document.getElementById('rumorPopup').classList.add('hidden')" class="text-redstar-gray-400 hover:text-redstar-dark">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 洋流分析图表
+            const oceanCurrentCtx = document.getElementById('oceanCurrentChart').getContext('2d');
+            new Chart(oceanCurrentCtx, {
+                type: 'line',
+                data: {
+                    labels: ['0h', '6h', '12h', '18h', '24h', '30h', '36h', '42h', '48h'],
+                    datasets: [{
+                        label: '洋流漂移距离(海里)',
+                        data: [0, 15, 32, 55, 78, 95, 108, 115, 120],
+                        borderColor: '#DC143C',
+                        backgroundColor: 'rgba(220, 20, 60, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'SU0507航班失联海域洋流模拟'
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // 参与人数图表
+            const participationCtx = document.getElementById('participationChart').getContext('2d');
+            new Chart(participationCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['蓬溪格勒', '遂宁斯格勒', '天府市', '长安市', '文轩市', '虹阳行政区'],
+                    datasets: [{
+                        label: '参与人数(万)',
+                        data: [185, 168, 152, 145, 128, 115],
+                        backgroundColor: [
+                            'rgba(212, 175, 55, 0.7)',
+                            'rgba(212, 175, 55, 0.6)',
+                            'rgba(212, 175, 55, 0.5)',
+                            'rgba(212, 175, 55, 0.4)',
+                            'rgba(212, 175, 55, 0.3)',
+                            'rgba(212, 175, 55, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(212, 175, 55, 1)',
+                            'rgba(212, 175, 55, 1)',
+                            'rgba(212, 175, 55, 1)',
+                            'rgba(212, 175, 55, 1)',
+                            'rgba(212, 175, 55, 1)',
+                            'rgba(212, 175, 55, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 模拟热搜榜更新动效
+            setInterval(function() {
+                const hotItems = document.querySelectorAll('#hot .flex.items-center.p-3');
+                const randomIndex = Math.floor(Math.random() * hotItems.length);
+                hotItems[randomIndex].classList.add('pulse-effect');
+                setTimeout(() => {
+                    hotItems[randomIndex].classList.remove('pulse-effect');
+                }, 2000);
+            }, 5000);
+
+            // 分享谣言内容时弹出澄清浮窗
+            const shareButtons = document.querySelectorAll('.post-marked .fa-share');
+            shareButtons.forEach(button => {
+                button.parentElement.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('rumorPopup').classList.remove('hidden');
+                    
+                    // 5秒后自动隐藏
+                    setTimeout(() => {
+                        document.getElementById('rumorPopup').classList.add('hidden');
+                    }, 5000);
+                });
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
